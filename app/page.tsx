@@ -1,23 +1,47 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { companyInfo } from "@/src/data/company";
 import { tours } from "@/src/data/tours";
+import { absoluteUrl } from "@/src/lib/seo";
 import { buildWhatsAppLink } from "@/src/lib/whatsapp";
 
 const featuredTours = tours.slice(0, 2);
+const homeDescription =
+  "Reserva tours en Apurímac desde Abancay: Saywite, Cconoc, Pampachiri, Casa de los Pitufos y rutas naturales con atención directa por WhatsApp.";
+const homeImage = absoluteUrl(
+  "/tours/casa-pitufos-bosque-piedras-pumachaca-chicha-ccasa/turismo-casa-pitufos-apurimac-peru.jpg"
+);
 
 export const metadata: Metadata = {
-  title: "Inicio",
-  description:
-    "Descubre tours en Apurímac con salidas desde Abancay, rutas auténticas y reservas fáciles por WhatsApp.",
+  title: {
+    absolute: "ApuRimay Tours | Tours en Apurímac desde Abancay",
+  },
+  description: homeDescription,
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "ApuRimay Tours | Inicio",
-    description:
-      "Descubre tours en Apurímac con salidas desde Abancay, rutas auténticas y reservas fáciles por WhatsApp.",
+    title: "ApuRimay Tours | Tours en Apurímac desde Abancay",
+    description: homeDescription,
     url: "/",
+    siteName: "ApuRimay Tours",
+    locale: "es_PE",
+    type: "website",
+    images: [
+      {
+        url: homeImage,
+        width: 1200,
+        height: 630,
+        alt: "Tours en Apurímac con ApuRimay Tours",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ApuRimay Tours | Tours en Apurímac desde Abancay",
+    description: homeDescription,
+    images: [homeImage],
   },
 };
 
@@ -26,8 +50,39 @@ export default function HomePage() {
     "Hola, quiero información sobre los tours disponibles en ApuRimay Tours."
   );
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    name: companyInfo.name,
+    legalName: companyInfo.legalName,
+    url: absoluteUrl("/"),
+    image: homeImage,
+    email: companyInfo.email,
+    telephone: companyInfo.salesPhones[0],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Abancay",
+      addressRegion: "Apurímac",
+      addressCountry: "PE",
+    },
+    areaServed: ["Abancay", "Apurímac", "Perú"],
+    sameAs: [`https://wa.me/${companyInfo.whatsappPrimary}`],
+    makesOffer: tours.slice(0, 4).map((tour) => ({
+      "@type": "Offer",
+      name: tour.title,
+      description: tour.shortDescription,
+      url: absoluteUrl(`/tours/${tour.slug}`),
+      areaServed: tour.location,
+      availability: "https://schema.org/InStock",
+    })),
+  };
+
   return (
     <main className="pb-18 pt-5 text-[#1F2937] sm:pb-20 sm:pt-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <section className="section-wrap">
         <div className="relative overflow-hidden rounded-[36px] border border-[#d9e2ec] bg-[#0F2F4A] px-6 py-8 shadow-[0_20px_48px_rgba(15,47,74,0.18)] sm:px-8 sm:py-10 lg:px-10 lg:py-12">
           <Image
