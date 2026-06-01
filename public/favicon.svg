@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="ApuRimay Tours">
+  <rect width="192" height="192" rx="42" fill="#123B5D"/>
+  <circle cx="144" cy="48" r="23" fill="#F97316"/>
+  <path d="M38 139 86 45l50 94h-25l-9-19H69l-9 19H38Zm40-39h15L85 82l-7 18Z" fill="#FFFFFF"/>
+  <path d="M121 70h28c19 0 31 11 31 28 0 12-6 22-17 26l20 31h-28l-16-27h-1v27h-24V70Zm24 40h2c6 0 10-4 10-10s-4-10-10-10h-2v20Z" fill="#FFFFFF"/>
+  <path d="M38 151h96" stroke="#F97316" stroke-width="12" stroke-linecap="round"/>
+</svg>
