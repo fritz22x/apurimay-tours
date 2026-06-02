@@ -18,11 +18,16 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
+        url: "/favicon-192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
         url: "/favicon.svg",
         type: "image/svg+xml",
       },
     ],
-    shortcut: "/favicon.svg",
+    shortcut: "/favicon-192.png",
   },
   openGraph: {
     title: "ApuRimay Tours | Tours en Apurímac desde Abancay",
